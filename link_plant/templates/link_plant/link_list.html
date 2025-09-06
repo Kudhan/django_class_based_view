@@ -1,0 +1,52 @@
+{% extends "./base.html" %}
+
+{% block title %}All Links{% endblock %}
+
+{% block header %}
+  All Links
+{% endblock %}
+
+{% block content %}
+<div class="overflow-x-auto flex justify-center">
+  <table class="min-w-[600px] bg-white rounded-xl shadow-lg border border-gray-200 text-center">
+    <thead class="bg-blue-600 text-white">
+      <tr>
+        <th class="py-3 px-4">Text</th>
+        <th class="py-3 px-4">URL</th>
+        <th class="py-3 px-4">Profile</th>
+        <th class="py-3 px-4">Edit</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for link in object_list %}
+      <tr class="border-b hover:bg-gray-50">
+        <td class="py-2 px-4">{{ link.text }}</td>
+        <td class="py-2 px-4">
+          <a href="{{ link.url }}" class="text-blue-500 hover:underline" target="_blank">
+            {{ link.url }}
+          </a>
+        </td>
+        <td class="py-2 px-4">{{ link.profile.slug }}</td>
+        <td class="py-2 px-4">
+          <a href="{% url 'update-list' link.pk %}" 
+             class="bg-yellow-500 text-white px-3 py-1 rounded hover:bg-yellow-600">
+            Edit
+          </a>
+        </td>
+      </tr>
+      {% empty %}
+      <tr>
+        <td colspan="4" class="py-4 text-gray-500">No links available.</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+<div class="flex justify-center mt-6">
+  <a href="{% url 'create-list' %}" 
+     class="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 shadow">
+    + Add New
+  </a>
+</div>
+{% endblock %}
