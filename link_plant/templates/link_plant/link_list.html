@@ -8,13 +8,14 @@
 
 {% block content %}
 <div class="overflow-x-auto flex justify-center">
-  <table class="min-w-[600px] bg-white rounded-xl shadow-lg border border-gray-200 text-center">
+  <table class="min-w-[700px] bg-white rounded-xl shadow-lg border border-gray-200 text-center">
     <thead class="bg-blue-600 text-white">
       <tr>
         <th class="py-3 px-4">Text</th>
         <th class="py-3 px-4">URL</th>
         <th class="py-3 px-4">Profile</th>
         <th class="py-3 px-4">Edit</th>
+        <th class="py-3 px-4">Delete</th>
       </tr>
     </thead>
     <tbody>
@@ -27,16 +28,26 @@
           </a>
         </td>
         <td class="py-2 px-4">{{ link.profile.slug }}</td>
+
+        <!-- Edit button -->
         <td class="py-2 px-4">
           <a href="{% url 'update-list' link.pk %}" 
              class="bg-yellow-500 text-white px-3 py-1 rounded hover:bg-yellow-600">
             Edit
           </a>
         </td>
+
+        <!-- Delete button -->
+        <td class="py-2 px-4">
+          <a href="{% url 'delete-list' link.pk %}" 
+             class="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600">
+            Delete
+          </a>
+        </td>
       </tr>
       {% empty %}
       <tr>
-        <td colspan="4" class="py-4 text-gray-500">No links available.</td>
+        <td colspan="5" class="py-4 text-gray-500">No links available.</td>
       </tr>
       {% endfor %}
     </tbody>
